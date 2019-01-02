@@ -1,95 +1,59 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+
+import * as React from 'react'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, keywords, title }) {
-  return (
-    <StaticQuery
-      query={detailsQuery}
-      render={data => {
-        const metaDescription =
-          description || data.site.siteMetadata.description
-        return (
-          <Helmet
-            htmlAttributes={{
-              lang,
-            }}
-            title={title}
-            titleTemplate={`%s | ${data.site.siteMetadata.title}`}
-            meta={[
-              {
-                name: `description`,
-                content: metaDescription,
-              },
-              {
-                property: `og:title`,
-                content: title,
-              },
-              {
-                property: `og:description`,
-                content: metaDescription,
-              },
-              {
-                property: `og:type`,
-                content: `website`,
-              },
-              {
-                name: `twitter:card`,
-                content: `summary`,
-              },
-              {
-                name: `twitter:creator`,
-                content: 'TODO - PUT IN TWITTER ACCOUNT',
-              },
-              {
-                name: `twitter:title`,
-                content: title,
-              },
-              {
-                name: `twitter:description`,
-                content: metaDescription,
-              },
-            ]
-              .concat(
-                keywords.length > 0
-                  ? {
-                      name: `keywords`,
-                      content: keywords.join(`, `),
-                    }
-                  : []
-              )
-              .concat(meta)}
+type Props = {
+  title: string,
+  description?: string,
+  image?: string,
+  keywords?: string,
+  location: { pathname: string },
+  children?: React.Node,
+}
+class HelmetPlus extends React.PureComponent<Props> {
+  render() {
+    const {
+      title,
+      description,
+      keywords,
+      image,
+      location,
+      children,
+    } = this.props
+
+    return (
+      <Helmet>
+        {title && <title>{title}</title>}
+        {description && <meta name="description" content={description} />}
+        {keywords && <meta name="keywords" content={keywords} />}
+        {image && <meta name="image" content={image} />}
+
+        {/* og meta */}
+        {location && (
+          <meta
+            property="og:url"
+            content={`https://developer.bitcoin.com${location.pathname}`}
           />
-        )
-      }}
-    />
-  )
-}
+        )}
+        {title && <meta property="og:title" content={title} />}
+        {description && (
+          <meta property="og:description" content={description} />
+        )}
+        {image && <meta property="og:image" content={image} />}
 
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  keywords: [],
-}
+        {/* twitter meta */}
+        <meta name="twitter:card" content="summary" />
+        {title && <meta name="twitter:title" content={title} />}
+        {description && (
+          <meta name="twitter:description" content={description} />
+        )}
+        {image && <meta name="twitter:image" content={image} />}
 
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.array,
-  keywords: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired,
-}
-
-export default SEO
-
-const detailsQuery = graphql`
-  query DefaultSEOQuery {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
+        {children}
+      </Helmet>
+    )
   }
-`
+}
+
+export default HelmetPlus

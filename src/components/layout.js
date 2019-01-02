@@ -1,11 +1,24 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
+import SEO from './seo'
+
+import Favicon from '../images/favicon.png'
 import './layout.css'
 
-const Layout = ({ children }) => (
+type Props = {
+  children: React.Node,
+  location: Object,
+}
+
+type Data = {
+  site: { siteMetadata: { title: string } },
+}
+
+const Layout = ({ children, location }: Props) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -16,9 +29,30 @@ const Layout = ({ children }) => (
         }
       }
     `}
-    render={data => (
+    render={(data: Data) => (
       <>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <SEO
+          title={data.site.siteMetadata.title}
+          description={
+            'Badger Wallet is your gateway to the Bitcoin Cash (BCH) ecosystem'
+          }
+          keywords={
+            'Badger wallet, developer tools, bitcoin, bitcoin cash, BCH, bitcoin wallet, sdk, api'
+          }
+          location={location}
+          image={Favicon}
+        >
+          <meta charSet="utf-8" />
+          <script>
+            var BitcoinMenuWidth = 1152; var BitcoinMenuLang = 'en';
+          </script>
+          <script
+            type="text/javascript"
+            src="https://menu.cdn.bitcoindotcom.net/the-footer/dist/universal-footer.js"
+          />
+          <script src="https://menu.cdn.bitcoindotcom.net/the-menu/dist/universal-menu.js" />
+        </SEO>
+
         <div
           style={{
             margin: `0 auto`,
@@ -29,16 +63,12 @@ const Layout = ({ children }) => (
         >
           {children}
           <footer>
-            © 2018, Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
+            © {+new Date()}, Built wit.h <a href="https://www.gatsbyjs.org" />
           </footer>
         </div>
       </>
     )}
   />
 )
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout
