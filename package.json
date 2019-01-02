@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "badger-bitcoin-com",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Badger Wallet, your gateway to the Bitcoin Cash (BCH) ecosystem",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "peter@bitcoin.com",
   "dependencies": {
     "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.20",
@@ -41,10 +41,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/Bitcoin-com/badger.bitcoin.com"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/Bitcoin-com/badger.bitcoin.com/issues"
   },
   "husky": {
     "hooks": {
