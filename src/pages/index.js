@@ -14,6 +14,7 @@ import Text from '../atoms/Text'
 import H3 from '../atoms/H3'
 import H2 from '../atoms/H2'
 import Button from '../atoms/Button'
+import BadgerButton from '../atoms/BadgerButton'
 
 import Layout from '../components/Layout'
 import Image from '../components/image'
@@ -32,7 +33,7 @@ const Hero = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
-  min-height: 90vh;
+  min-height: 92vh;
   background-color: red;
   position: relative;
   overflow-x: hidden;
@@ -71,6 +72,17 @@ const Caption = styled.div`
   `}
 `
 
+const BadgerButtonExample = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+`
+
+const ButtonHolder = styled.div`
+  display: grid;
+  align-content: center;
+  justify-content: center;
+`
+
 type Props = {
   location: any,
   data: { heroImage: any, identityImage: any, cashIDImage: any },
@@ -86,6 +98,8 @@ const IndexPage = ({ location, data }: Props) => (
         `BCH`,
         'cryptocurrency',
         'wallet',
+        'distributed applications',
+        'dapp',
       ]}
     />
     <Hero>
@@ -169,9 +183,50 @@ const IndexPage = ({ location, data }: Props) => (
           </CaptionArea>
         </Example>
       </Section>
-    </Container>
 
-    <h1>Content after the hero</h1>
+      <Section>
+        <Container thin>
+          <SectionTopGroup>
+            <H2 center>Badger Button</H2>
+            <Text center>
+              Badger is your identity on this new web. You can pay for premium
+              content, run smart contracts and experience dapps seamlessly and
+              trust free. Install Badger to test the Badger Button demo below
+              now.
+            </Text>
+          </SectionTopGroup>
+        </Container>
+        <BadgerButtonExample>
+          <div>
+            <H3>Micropayments</H3>
+            <Text>
+              Paywalls, in-app purchases, tokens and smart-contracts. Experience
+              an entirely new web seamlessly.
+            </Text>
+          </div>
+          <ButtonHolder>
+            <BadgerButton
+              to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+              satoshis={1000}
+              successFn={() => console.log('Success Fn Called')}
+              failFn={() => console.log('Fail Fn Called')}
+            />
+          </ButtonHolder>
+        </BadgerButtonExample>
+      </Section>
+      <Section>
+        <Container thin>
+          <SectionTopGroup>
+            <H2 center>$BGR</H2>
+            <Text center>
+              $BGR is the utility token of the Badger platform. Users can fund
+              Badger w/ $BGR and as they navigate the web they can use dapps
+              seemlesly.
+            </Text>
+          </SectionTopGroup>
+        </Container>
+      </Section>
+    </Container>
   </Layout>
 )
 
