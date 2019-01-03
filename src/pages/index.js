@@ -17,7 +17,6 @@ import Button from '../atoms/Button'
 import BadgerButton from '../atoms/BadgerButton'
 
 import Layout from '../components/Layout'
-import Image from '../components/image'
 import SEO from '../components/Seo'
 import Container from '../components/Container'
 
