@@ -5,7 +5,14 @@ import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChrome, faFirefox } from '@fortawesome/free-brands-svg-icons'
+
+import SmartLink from '../atoms/SmartLink'
 import Title from '../atoms/Title'
+import H3 from '../atoms/H3'
+import Button from '../atoms/Button'
+
 import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
@@ -13,9 +20,12 @@ import SEO from '../components/seo'
 const Content = styled.div`
   text-align: center;
   z-index: 1;
+  padding-bottom: 35px;
 `
 
-const Text = styled.p``
+const Text = styled.p`
+  font-size: 18px;
+`
 
 const Hero = styled.div`
   display: grid;
@@ -26,6 +36,13 @@ const Hero = styled.div`
   position: relative;
   overflow-x: hidden;
   color: ${props => props.theme.heroText};
+`
+
+const DownloadRow = styled.div`
+  display: grid;
+  grid-gap: 15px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 200px);
 `
 
 type Props = {
@@ -52,17 +69,26 @@ const IndexPage = ({ location, data }: Props) => (
       />
       <Content>
         <Title>Badger</Title>
-        <Text>
-          Your gateway into the world of Bitcoin Cash (BCH) distributed
-          applications
-        </Text>
+        <H3>Your gateway to Bitcoin Cash (BCH) apps.</H3>
+        <DownloadRow>
+          <SmartLink to="https://chrome.google.com/webstore/detail/badger-wallet/jadobjbcgibiopkifknkfnohlelpocll">
+            <Button>
+              <Text>
+                <FontAwesomeIcon icon={faChrome} /> Chrome{' '}
+              </Text>
+            </Button>
+          </SmartLink>
+          <SmartLink to="https://addons.mozilla.org/en-US/firefox/addon/badger-wallet/">
+            <Button>
+              <Text>
+                <FontAwesomeIcon icon={faFirefox} /> Firefox{' '}
+              </Text>
+            </Button>
+          </SmartLink>
+        </DownloadRow>
       </Content>
     </Hero>
-
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h1>Content after the hero</h1>
   </Layout>
 )
 
