@@ -10,21 +10,20 @@ import { faChrome, faFirefox } from '@fortawesome/free-brands-svg-icons'
 
 import SmartLink from '../atoms/SmartLink'
 import Title from '../atoms/Title'
+import Text from '../atoms/Text'
 import H3 from '../atoms/H3'
+import H2 from '../atoms/H2'
 import Button from '../atoms/Button'
 
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import Image from '../components/image'
-import SEO from '../components/seo'
+import SEO from '../components/Seo'
+import Container from '../components/Container'
 
-const Content = styled.div`
+const HeroContent = styled.div`
   text-align: center;
   z-index: 1;
   padding-bottom: 35px;
-`
-
-const Text = styled.p`
-  font-size: 18px;
 `
 
 const Hero = styled.div`
@@ -44,6 +43,16 @@ const DownloadRow = styled.div`
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 200px);
 `
+
+const Section = styled.div`
+  padding: 30px 0;
+  border-bottom: 1px solid #777;
+`
+
+const Example = styled.div``
+
+const ImageArea = styled.div``
+const Caption = styled.div``
 
 type Props = {
   location: any,
@@ -67,7 +76,7 @@ const IndexPage = ({ location, data }: Props) => (
         style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
         fluid={data.heroImage.childImageSharp.fluid}
       />
-      <Content>
+      <HeroContent>
         <Title>Badger</Title>
         <H3>Your gateway to Bitcoin Cash (BCH) apps.</H3>
         <DownloadRow>
@@ -86,8 +95,36 @@ const IndexPage = ({ location, data }: Props) => (
             </Button>
           </SmartLink>
         </DownloadRow>
-      </Content>
+      </HeroContent>
     </Hero>
+    <Container>
+      <Section>
+        <Container thin>
+          <H2 center>Identity</H2>
+          <Text center>
+            Badger is a secure identity vault for Bitcoin Cash (BCH). It allows
+            you to hold Bitcoin Cash (BCH) & tokens; serving as your bridge to
+            decentralized applications (dapps).
+          </Text>
+        </Container>
+        <Example>
+          <ImageArea />
+          <Caption />
+        </Example>
+      </Section>
+
+      <Section>
+        <Container thin>
+          <H2 center>Identity</H2>
+          <Text center>
+            Badger is a secure identity vault for Bitcoin Cash (BCH). It allows
+            you to hold Bitcoin Cash (BCH) & tokens; serving as your bridge to
+            decentralized applications (dapps).
+          </Text>
+        </Container>
+      </Section>
+    </Container>
+
     <h1>Content after the hero</h1>
   </Layout>
 )

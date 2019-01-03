@@ -4,7 +4,7 @@ import * as React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { ThemeProvider } from 'styled-components'
 
-import SEO from './seo'
+import SEO from './Seo'
 
 import defaultTheme from '../styles/themes'
 import Favicon from '../images/favicon.png'
