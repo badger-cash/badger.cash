@@ -2,6 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Badger Wallet`,
     description: `Badger Wallet is your gateway to Bitcoin Cash distributed apps, your identity vault, Simple Ledger and Wormhole tokens`,
+    siteUrl: 'https://badger.bitcoin.com',
   },
   plugins: [
     `gatsby-plugin-flow`,
