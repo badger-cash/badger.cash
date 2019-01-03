@@ -20,6 +20,8 @@ import Image from '../components/image'
 import SEO from '../components/Seo'
 import Container from '../components/Container'
 
+import media from '../styles/media'
+
 const HeroContent = styled.div`
   text-align: center;
   z-index: 1;
@@ -45,18 +47,33 @@ const DownloadRow = styled.div`
 `
 
 const Section = styled.div`
-  padding: 30px 0;
-  border-bottom: 1px solid #777;
+  padding: 50px 0;
+  border-bottom: 1px solid ${props => props.theme.fg100};
+`
+const SectionTopGroup = styled.div`
+  margin-bottom: 50px;
 `
 
-const Example = styled.div``
+const Example = styled.div`
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+`
 
-const ImageArea = styled.div``
-const Caption = styled.div``
+const CaptionArea = styled.div`
+  display: grid;
+  align-content: center;
+`
+
+const Caption = styled.div`
+  ${media.large`
+    border-left: 8px solid ${props => props.theme.brand};
+    padding-left: 18px;
+  `}
+`
 
 type Props = {
   location: any,
-  data: { heroImage: any },
+  data: { heroImage: any, identityImage: any, cashIDImage: any },
 }
 
 const IndexPage = ({ location, data }: Props) => (
@@ -100,28 +117,57 @@ const IndexPage = ({ location, data }: Props) => (
     <Container>
       <Section>
         <Container thin>
-          <H2 center>Identity</H2>
-          <Text center>
-            Badger is a secure identity vault for Bitcoin Cash (BCH). It allows
-            you to hold Bitcoin Cash (BCH) & tokens; serving as your bridge to
-            decentralized applications (dapps).
-          </Text>
+          <SectionTopGroup>
+            <H2 center>Identity</H2>
+            <Text center>
+              Badger is a secure identity vault for Bitcoin Cash (BCH). It
+              allows you to hold Bitcoin Cash (BCH) & tokens; serving as your
+              bridge to decentralized applications (dapps).
+            </Text>
+          </SectionTopGroup>
         </Container>
         <Example>
-          <ImageArea />
-          <Caption />
+          <Img fluid={data.identityImage.childImageSharp.fluid} />
+          <CaptionArea>
+            <Caption>
+              <H3>Bitcoin Cash Gateway</H3>
+              <Text>
+                Bitcoin Cash and tokens enable an entirely new dimension to the
+                web with micro-payments, smart-assets, decentralized exchanges,
+                distributed autonomous organizations and much more.
+              </Text>
+            </Caption>
+          </CaptionArea>
         </Example>
       </Section>
 
       <Section>
         <Container thin>
-          <H2 center>Identity</H2>
-          <Text center>
-            Badger is a secure identity vault for Bitcoin Cash (BCH). It allows
-            you to hold Bitcoin Cash (BCH) & tokens; serving as your bridge to
-            decentralized applications (dapps).
-          </Text>
+          <SectionTopGroup>
+            <H2 center>CashID</H2>
+            <Text center>
+              CashID enables users to sign in to web pages using their Bitcoin
+              Cash keys.
+            </Text>
+          </SectionTopGroup>
         </Container>
+        <Example>
+          <Img fluid={data.cashIDImage.childImageSharp.fluid} />
+          <CaptionArea>
+            <Caption>
+              <H3>Your Identity Vault</H3>
+              <Text>
+                We see this as an entirely new paradigm in identity management
+                and an enabling technology in our goal to be your idenity vault
+                and gateway to BCH dapps.{' '}
+                <SmartLink to="https://cashid.badgerwallet.cash/">
+                  Try out a CashID demo
+                </SmartLink>
+                .
+              </Text>
+            </Caption>
+          </CaptionArea>
+        </Example>
       </Section>
     </Container>
 
@@ -141,6 +187,20 @@ export const query = graphql`
           maxWidth: 2000
           quality: 85
         ) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    identityImage: file(relativePath: { eq: "wallet.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 800, quality: 85) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    cashIDImage: file(relativePath: { eq: "cashid.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 800, quality: 85) {
           ...GatsbyImageSharpFluid
         }
       }

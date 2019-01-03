@@ -12,7 +12,7 @@ const Button = styled.button`
   transition: all 0.2s;
   background-color: ${props => props.theme.heroText};
   &:hover {
-    background-color: ${props => props.theme.fg};
+    background-color: ${props => props.theme.fg900};
     color: ${props => props.theme.brand};
     border-color: ${props => props.theme.brand};
   }

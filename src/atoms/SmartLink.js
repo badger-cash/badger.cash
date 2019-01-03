@@ -6,9 +6,10 @@ import { Link } from 'gatsby'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  /* &:hover {
-    color: ${props => props.theme.secondary};
-  } */
+  &:hover {
+    background-color: ${props => props.theme.brand};
+    color: ${props => props.theme.bg};
+  }
 `
 const StyledA = props => <StyledLink as="a" {...props} />
 
