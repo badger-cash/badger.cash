@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChrome,
   faFirefox,
-  faFacebook,
   faTwitter,
   faGithub,
   faTelegram,
@@ -28,7 +27,6 @@ import SEO from '../components/Seo'
 import Container from '../components/Container'
 
 import media from '../styles/media'
-import { faTeethOpen } from '@fortawesome/free-solid-svg-icons'
 
 const HeroContent = styled.div`
   text-align: center;
@@ -40,7 +38,7 @@ const Hero = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
-  min-height: 92vh;
+  min-height: 93vh;
   background-color: red;
   position: relative;
   overflow-x: hidden;

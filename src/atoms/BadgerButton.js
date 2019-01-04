@@ -57,7 +57,7 @@ class Filler extends React.Component<PropsFiller, StateFiller> {
   }
   render() {
     const { width } = this.state
-    return <FillerDiv width={this.state.width} />
+    return <FillerDiv width={width} />
   }
 }
 
@@ -86,13 +86,13 @@ class BadgerButton extends React.Component<Props, State> {
 
       let txParams = {
         to,
-        from: web4bch.bch.defaultAccount,
+        from: web4bch2.bch.defaultAccount,
         value: satoshis,
       }
 
       this.setState({ step: 'pending' })
 
-      web4bch.bch.sendTransaction(txParams, (err, res) => {
+      web4bch2.bch.sendTransaction(txParams, (err, res) => {
         if (err) {
           console.log('send err', err)
           failFn(err)
@@ -109,7 +109,6 @@ class BadgerButton extends React.Component<Props, State> {
   }
 
   render() {
-    const { to, successFn, failFn, satoshis } = this.props
     const { step } = this.state
     if (step === 'fresh') {
       return (
