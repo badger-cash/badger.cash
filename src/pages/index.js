@@ -77,8 +77,8 @@ const BadgerButtonExample = styled.div`
 `
 
 const ButtonHolder = styled.div`
-  display: grid;
-  align-content: center;
+  display: flex;
+  align-items: center;
   justify-content: center;
 `
 

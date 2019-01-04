@@ -6,6 +6,7 @@ import styled from 'styled-components'
 const Button = styled.button`
   cursor: pointer;
   outline: none;
+  padding: 10px;
   width: 100%;
   border: 2px solid ${props => props.theme.heroText};
   border-radius: 4px;
