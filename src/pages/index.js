@@ -39,7 +39,7 @@ const Hero = styled.div`
   align-items: center;
   justify-items: center;
   min-height: 93vh;
-  background-color: red;
+  background-color: ${props => props.theme.brand};
   position: relative;
   overflow-x: hidden;
   color: ${props => props.theme.heroText};

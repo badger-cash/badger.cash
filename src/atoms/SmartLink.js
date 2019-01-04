@@ -12,8 +12,7 @@ const StyledLink = styled(Link)`
     color: ${props => props.theme.brand};
   }
   &:hover {
-    background-color: ${props => props.theme.brand};
-    color: ${props => props.theme.bg};
+    color: ${props => props.theme.brandDark};
   }
 `
 const StyledA = props => <StyledLink as="a" {...props} />
