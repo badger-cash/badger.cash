@@ -266,6 +266,22 @@ const IndexPage = ({ location, data }: Props) => (
         </BadgerButtonExample>
       </Section>
 
+      <Section>
+        <Container thin>
+          <SectionTopGroup>
+            <H2 center>Documentation</H2>
+            <Text center>
+              Check out our{' '}
+              <SmartLink to="https://developer.bitcoin.com/badger">
+                Developer Documentation
+              </SmartLink>{' '}
+              and use Badger to build your next Bitcoin Cash (BCH) project with
+              ease.
+            </Text>
+          </SectionTopGroup>
+        </Container>
+      </Section>
+
       <Section style={{ borderBottom: 'none', paddingBottom: 0 }}>
         <Container thin>
           <SocialLinks>
