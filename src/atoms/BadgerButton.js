@@ -22,7 +22,7 @@ const BButton = styled.button`
 const Loader = styled.div`
   height: 20px;
   width: 75%;
-  background-color: ${props => props.theme.fg300};
+  background-color: ${props => props.theme.fg100};
   border-radius: 10px;
   display: flex;
   overflow: hidden;

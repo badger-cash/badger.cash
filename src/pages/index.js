@@ -6,7 +6,14 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChrome, faFirefox } from '@fortawesome/free-brands-svg-icons'
+import {
+  faChrome,
+  faFirefox,
+  faFacebook,
+  faTwitter,
+  faGithub,
+  faTelegram,
+} from '@fortawesome/free-brands-svg-icons'
 
 import SmartLink from '../atoms/SmartLink'
 import Title from '../atoms/Title'
@@ -21,6 +28,7 @@ import SEO from '../components/Seo'
 import Container from '../components/Container'
 
 import media from '../styles/media'
+import { faTeethOpen } from '@fortawesome/free-solid-svg-icons'
 
 const HeroContent = styled.div`
   text-align: center;
@@ -56,7 +64,14 @@ const SectionTopGroup = styled.div`
 
 const Example = styled.div`
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content;
+  grid-gap: 25px;
+  ${media.large`
+    grid-template-columns: 1.6fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 0;
+  `}
 `
 
 const CaptionArea = styled.div`
@@ -65,7 +80,9 @@ const CaptionArea = styled.div`
 `
 
 const Caption = styled.div`
+  text-align: center;
   ${media.large`
+    text-align: left;
     border-left: 8px solid ${props => props.theme.brand};
     padding-left: 18px;
   `}
@@ -73,13 +90,50 @@ const Caption = styled.div`
 
 const BadgerButtonExample = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content;
+  grid-gap: 25px;
+  ${media.large`
+    grid-template-columns: 1fr 1.5fr;
+    grid-gap: 0;
+    grid-template-rows: 1fr;
+  `}
+`
+
+const BadgerButtonExampleText = styled.div`
+  text-align: center;
+  ${media.large`
+    text-align: left;
+  `}
 `
 
 const ButtonHolder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+
+const SocialLinks = styled.div`
+  display: grid;
+  grid-gap: 15px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 50px);
+  text-align: center;
+`
+
+const SocialCircle = styled.a`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: ${props => props.theme.fg100};
+  color: ${props => props.theme.fg900};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: ${props => props.theme.brand};
+    color: ${props => props.theme.bg};
+  }
 `
 
 type Props = {
@@ -108,7 +162,7 @@ const IndexPage = ({ location, data }: Props) => (
       />
       <HeroContent>
         <Title>Badger</Title>
-        <H3>Your gateway to Bitcoin Cash (BCH) apps.</H3>
+        <H3>Your gateway to the world of Bitcoin Cash (BCH) apps</H3>
         <DownloadRow>
           <SmartLink to="https://chrome.google.com/webstore/detail/badger-wallet/jadobjbcgibiopkifknkfnohlelpocll">
             <Button>
@@ -135,7 +189,7 @@ const IndexPage = ({ location, data }: Props) => (
             <Text center>
               Badger is a secure identity vault for Bitcoin Cash (BCH). It
               allows you to hold Bitcoin Cash (BCH) & tokens; serving as your
-              bridge to decentralized applications (dapps).
+              bridge to BCH applications.
             </Text>
           </SectionTopGroup>
         </Container>
@@ -160,7 +214,7 @@ const IndexPage = ({ location, data }: Props) => (
             <H2 center>CashID</H2>
             <Text center>
               CashID enables users to sign in to web pages using their Bitcoin
-              Cash keys.
+              Cash (BCH) keys.
             </Text>
           </SectionTopGroup>
         </Container>
@@ -172,7 +226,7 @@ const IndexPage = ({ location, data }: Props) => (
               <Text>
                 We see this as an entirely new paradigm in identity management
                 and an enabling technology in our goal to be your idenity vault
-                and gateway to BCH dapps.{' '}
+                and gateway to Bitcoin Cash (BCH) apps.{' '}
                 <SmartLink to="https://cashid.badgerwallet.cash/">
                   Try out a CashID demo
                 </SmartLink>
@@ -189,20 +243,20 @@ const IndexPage = ({ location, data }: Props) => (
             <H2 center>Badger Button</H2>
             <Text center>
               Badger is your identity on this new web. You can pay for premium
-              content, run smart contracts and experience dapps seamlessly and
-              trust free. Install Badger to test the Badger Button demo below
-              now.
+              content, run smart contracts and experience Bitcoin Cash (BCH)
+              apps seamlessly and trust free. Install Badger to test the Badger
+              Button demo below now.
             </Text>
           </SectionTopGroup>
         </Container>
         <BadgerButtonExample>
-          <div>
+          <BadgerButtonExampleText>
             <H3>Micropayments</H3>
             <Text>
               Paywalls, in-app purchases, tokens and smart-contracts. Experience
               an entirely new web seamlessly.
             </Text>
-          </div>
+          </BadgerButtonExampleText>
           <ButtonHolder>
             <BadgerButton
               to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
@@ -213,16 +267,29 @@ const IndexPage = ({ location, data }: Props) => (
           </ButtonHolder>
         </BadgerButtonExample>
       </Section>
-      <Section>
+
+      <Section style={{ borderBottom: 'none', paddingBottom: 0 }}>
         <Container thin>
-          <SectionTopGroup>
-            <H2 center>$BGR</H2>
-            <Text center>
-              $BGR is the utility token of the Badger platform. Users can fund
-              Badger w/ $BGR and as they navigate the web they can use dapps
-              seemlesly.
-            </Text>
-          </SectionTopGroup>
+          <SocialLinks>
+            <SocialCircle
+              href="https://twitter.com/badgerwallet"
+              target="_blank"
+            >
+              <FontAwesomeIcon icon={faTwitter} />
+            </SocialCircle>
+            <SocialCircle
+              href="https://github.com/Bitcoin-com/badger/"
+              target="_blank"
+            >
+              <FontAwesomeIcon icon={faGithub} />
+            </SocialCircle>
+            <SocialCircle
+              href="https://t.me/joinchat/IoTQ_hGflnfwd3YJSF8cRQ"
+              target="_blank"
+            >
+              <FontAwesomeIcon icon={faTelegram} />
+            </SocialCircle>
+          </SocialLinks>
         </Container>
       </Section>
     </Container>
