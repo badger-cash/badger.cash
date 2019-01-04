@@ -104,7 +104,7 @@ class BadgerButton extends React.Component<Props, State> {
         }
       })
     } else {
-      window.open('https://badgerwallet.cash')
+      window.open('https://badger.bitcoin.com')
     }
   }
 
