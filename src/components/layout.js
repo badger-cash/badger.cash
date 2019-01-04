@@ -4,11 +4,17 @@ import * as React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { ThemeProvider } from 'styled-components'
 
+import { config } from '@fortawesome/fontawesome-svg-core'
+
 import SEO from './Seo'
 
 import defaultTheme from '../styles/themes'
 import Favicon from '../images/favicon.png'
 import './layout.css'
+
+import '@fortawesome/fontawesome-svg-core/styles.css'
+
+config.autoAddCss = false
 
 type Props = {
   children: React.Node,
