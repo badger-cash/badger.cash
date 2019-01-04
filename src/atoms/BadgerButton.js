@@ -89,7 +89,6 @@ class BadgerButton extends React.Component<Props, State> {
         from: web4bch.bch.defaultAccount,
         value: satoshis,
       }
-      // parent.classList.add("clicked");
 
       this.setState({ step: 'pending' })
 
@@ -100,21 +99,8 @@ class BadgerButton extends React.Component<Props, State> {
           this.setState({ step: 'fresh' })
         } else {
           console.log('send success:', res)
-          console.log(res)
           successFn(res)
           this.setState({ step: 'complete' })
-          // let paywallId = badgerButton.getAttribute("data-paywall-id")
-          // if (paywallId) {
-          //   let free = document.getElementById("free")
-          //   let paywall = document.getElementById("paywall")
-          //   free.style.display = "none"
-          //   paywall.style.display = "block"
-          // }
-          // parent.classList.add("success")
-          // let successCallback = badgerButton.getAttribute("data-success-callback")
-          // if (successFn) {
-          //   successFn(res)
-          // window[successCallback](res)
         }
       })
     } else {
@@ -127,23 +113,9 @@ class BadgerButton extends React.Component<Props, State> {
     const { step } = this.state
     if (step === 'fresh') {
       return (
-        <>
-          {/* <div id="free"> */}
-          {/* <ButtonWrapper> */}
-          <BButton onClick={this.handleClick}>
-            <Text>Purchase for 1/3rd of $0.01</Text>
-            <div className="fill" />
-            <div className="fa fa-check" />
-          </BButton>
-          {/* </ButtonWrapper> */}
-          {/* </div> */}
-          {/* <div id="paywall" style={{ display: 'none' }}>
-            <h5>Thank you for purchasing!</h5>
-            <p>
-              <img src="img/bch_logo.svg" className="c-image--cover" />
-            </p>
-          </div> */}
-        </>
+        <BButton onClick={this.handleClick}>
+          <Text>Purchase for 1/3rd of $0.01</Text>
+        </BButton>
       )
     }
     if (step === 'pending') {
@@ -160,28 +132,7 @@ class BadgerButton extends React.Component<Props, State> {
         </CompleteCircle>
       )
     }
-    return <div>no step found</div>
-    // return (
-    //   <>
-    //     {/* <div id="free"> */}
-    //       {/* <ButtonWrapper> */}
-    //         <BButton
-    //           onClick={this.handleClick}
-    //         >
-    //           <Text>Purchase for 1/3rd of $0.01</Text>
-    //           <div className="fill" />
-    //           <div className="fa fa-check" />
-    //         </BButton>
-    //         {/* </ButtonWrapper> */}
-    //     {/* </div> */}
-    //     {/* <div id="paywall" style={{ display: 'none' }}>
-    //       <h5>Thank you for purchasing!</h5>
-    //       <p>
-    //         <img src="img/bch_logo.svg" className="c-image--cover" />
-    //       </p>
-    //     </div> */}
-    //   </>
-    // )
+    return <div>State not found</div>
   }
 }
 
