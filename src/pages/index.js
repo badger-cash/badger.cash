@@ -224,11 +224,7 @@ const IndexPage = ({ location, data }: Props) => (
               <Text>
                 We see this as an entirely new paradigm in identity management
                 and an enabling technology in our goal to be your idenity vault
-                and gateway to Bitcoin Cash (BCH) apps.{' '}
-                <SmartLink to="https://cashid.badgerwallet.cash/">
-                  Try out a CashID demo
-                </SmartLink>
-                .
+                and gateway to Bitcoin Cash (BCH) apps.
               </Text>
             </Caption>
           </CaptionArea>
