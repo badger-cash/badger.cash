@@ -2,13 +2,18 @@
 
 // Large title, used in the hero
 
-import React from 'react'
 import styled from 'styled-components'
 
+import media from '../styles/media'
+
 const Title = styled.h1`
-  font-size: ${18 * 6.5}px;
+  font-size: ${18 * 4}px;
   line-height: 1em;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0.2em;
+  ${media.large`
+    font-size: ${18 * 6.5}px;
+  `}
 `
 
 export default Title
