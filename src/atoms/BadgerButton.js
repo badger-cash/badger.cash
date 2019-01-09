@@ -47,6 +47,7 @@ const FillerDiv = styled.div`
 
 type PropsFiller = {}
 type StateFiller = { width: number }
+
 class Filler extends React.Component<PropsFiller, StateFiller> {
   constructor(props) {
     super(props)
@@ -61,30 +62,95 @@ class Filler extends React.Component<PropsFiller, StateFiller> {
   }
 }
 
+type CurrencyCode = 'USD' | 'CAD' | 'HKD' | 'JPY'
+
+const buildPriceEndpoint = (currency: CurrencyCode) => {
+  return `https://index-api.bitcoin.com/api/v0/cash/price/${currency}`
+}
+
 type Props = {
   to: string,
+  // satoshis: number,
+  text?: string,
+  price: number,
+  currency: CurrencyCode,
+
   successFn: Function,
-  failFn: Function,
-  satoshis: number,
+  failFn?: Function,
 }
-type State = { step: 'fresh' | 'pending' | 'complete' }
+type State = {
+  step: 'fresh' | 'pending' | 'complete',
+  BCHPrice: {
+    [currency: CurrencyCode]: {
+      price: ?number,
+      stamp: ?number,
+    },
+  },
+}
 
 class BadgerButton extends React.Component<Props, State> {
+  static defaultProps = {
+    currency: 'USD',
+  }
+
   constructor(props: Props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.state = {
       step: 'fresh',
+      BCHPrice: {},
     }
+
+    this.updateBCHPrice = this.updateBCHPrice.bind(this)
+  }
+
+  componentDidMount() {
+    const currency: CurrencyCode = this.props.currency
+    this.updateBCHPrice(currency)
+    // const priceUSD= await fetch('https://index-api.bitcoin.com/api/v0/cash/price/usd')
+  }
+
+  async updateBCHPrice(currency: CurrencyCode) {
+    const priceRequest = await fetch(buildPriceEndpoint(currency))
+    const result = await priceRequest.json()
+
+    // if (result.price != '') {
+    //   var singleDollarValue = result.price / 100
+    //   var singleDollarSatoshis = 100000000 / singleDollarValue
+    //   // resolve(singleDollarSatoshis);
+    // }
+
+    const { price, stamp } = result
+    // if(price) {
+    //   const singleDollarValue = price / 100;
+    //   const singleDollarSatoshis = 100000000 / singleDollarValue
+
+    // }
+
+    this.setState({
+      BCHPrice: { [currency]: { price, stamp } },
+    })
   }
 
   handleClick() {
-    const { to, satoshis, successFn, failFn } = this.props
-    if (window && typeof window.Web4Bch !== 'undefined') {
-      let { web4bch } = window
-      let web4bch2 = new window.Web4Bch(web4bch.currentProvider)
+    const { to, successFn, failFn, text, currency, price } = this.props
+    const { BCHPrice } = this.state
 
-      let txParams = {
+    const priceInCurrency = BCHPrice[currency].price
+    if (!priceInCurrency) {
+      this.updateBCHPrice(currency)
+      return
+    }
+
+    const singleDollarValue = priceInCurrency / 100
+    const singleDollarSatoshis = 100000000 / singleDollarValue
+    const satoshis = price * singleDollarSatoshis
+
+    if (window && typeof window.Web4Bch !== 'undefined') {
+      const { web4bch } = window
+      const web4bch2 = new window.Web4Bch(web4bch.currentProvider)
+
+      const txParams = {
         to,
         from: web4bch2.bch.defaultAccount,
         value: satoshis,
@@ -94,11 +160,11 @@ class BadgerButton extends React.Component<Props, State> {
 
       web4bch2.bch.sendTransaction(txParams, (err, res) => {
         if (err) {
-          console.log('send err', err)
-          failFn(err)
+          console.log('BadgerButton send cancel', err)
+          failFn && failFn(err)
           this.setState({ step: 'fresh' })
         } else {
-          console.log('send success:', res)
+          console.log('BadgerButton send success:', res)
           successFn(res)
           this.setState({ step: 'complete' })
         }
@@ -110,10 +176,28 @@ class BadgerButton extends React.Component<Props, State> {
 
   render() {
     const { step } = this.state
+
+    const { text, price, currency } = this.props
+
+    const { BCHPrice } = this.state
+
+    const priceInCurrency = BCHPrice[currency] && BCHPrice[currency].price
+
+    let satoshis = '----'
+    if (priceInCurrency) {
+      const singleDollarValue = priceInCurrency / 100
+      const singleDollarSatoshis = 100000000 / singleDollarValue
+      satoshis = Math.trunc(price * singleDollarSatoshis)
+    }
+
     if (step === 'fresh') {
       return (
         <BButton onClick={this.handleClick}>
-          <Text>Donate 1/3rd of $0.01 to EatBCH</Text>
+          <Text>
+            {price.toPrecision(2)} - {currency}
+          </Text>
+          <Text>{text}</Text>
+          <Text>{satoshis} Sats</Text>
         </BButton>
       )
     }
