@@ -113,7 +113,7 @@ class BadgerButton extends React.Component<Props, State> {
     if (step === 'fresh') {
       return (
         <BButton onClick={this.handleClick}>
-          <Text>Purchase for 1/3rd of $0.01</Text>
+          <Text>Donate 1/3rd of $0.01 to EatBCH</Text>
         </BButton>
       )
     }

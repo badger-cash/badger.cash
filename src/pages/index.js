@@ -185,9 +185,9 @@ const IndexPage = ({ location, data }: Props) => (
           <SectionTopGroup>
             <H2 center>Identity</H2>
             <Text center>
-              Badger is a secure identity vault for Bitcoin Cash (BCH). It
-              allows you to hold Bitcoin Cash (BCH) & tokens; serving as your
-              bridge to BCH applications.
+              Badger is a secure identity vault for Bitcoin Cash. It allows you
+              to hold Bitcoin Cash & tokens&mdash;serving as your bridge to BCH
+              applications.
             </Text>
           </SectionTopGroup>
         </Container>
@@ -211,8 +211,7 @@ const IndexPage = ({ location, data }: Props) => (
           <SectionTopGroup>
             <H2 center>CashID</H2>
             <Text center>
-              CashID enables users to sign in to web pages using their Bitcoin
-              Cash (BCH) keys.
+              CashID enables users to sign in to web pages using their BCH keys.
             </Text>
           </SectionTopGroup>
         </Container>
@@ -223,8 +222,8 @@ const IndexPage = ({ location, data }: Props) => (
               <H3>Your Identity Vault</H3>
               <Text>
                 We see this as an entirely new paradigm in identity management
-                and an enabling technology in our goal to be your idenity vault
-                and gateway to Bitcoin Cash (BCH) apps.
+                and an enabling technology in our goal to be your identity vault
+                and gateway to Bitcoin Cash apps.
               </Text>
             </Caption>
           </CaptionArea>
@@ -237,8 +236,8 @@ const IndexPage = ({ location, data }: Props) => (
             <H2 center>Badger Button</H2>
             <Text center>
               Badger is your identity on this new web. You can pay for premium
-              content, run smart contracts and experience Bitcoin Cash (BCH)
-              apps seamlessly and trust free. Install Badger to test the Badger
+              content, run smart contracts and experience Bitcoin Cash apps
+              seamlessly and trust free. Install Badger to test the Badger
               Button demo below now.
             </Text>
           </SectionTopGroup>
