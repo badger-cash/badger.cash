@@ -31,7 +31,7 @@ const SectionTitle = styled.div`
 const SectionExamples = styled.div`
   display: grid;
   grid-area: examples;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   justify-items: center;
   grid-gap: 35px;
 `
@@ -105,6 +105,56 @@ class BadgerButtonPage extends React.Component<Props> {
                   currency={CURRENCY_EXAMPLE}
                   showSatoshis={true}
                   text="Donate to EatBCH"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+              </SectionExamples>
+            </Section>
+            <Section>
+              <SectionTitle>
+                <H3>Custom Colours</H3>
+              </SectionTitle>
+              <SectionExamples>
+                <BadgerButton
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  text="Donate to EatBCH"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                  color1="#222930"
+                  color2="#E9E9E9"
+                />
+                <BadgerButton
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  showSatoshis={true}
+                  text="Donate to EatBCH"
+                  color1="#DC3D24"
+                  color2="#232B2B"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+                <BadgerButton
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  showSatoshis={true}
+                  text="Donate to EatBCH"
+                  color1="#E9C92D"
+                  color2="#FFF"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+                <BadgerButton
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  showSatoshis={true}
+                  text="Donate to EatBCH"
+                  color1="#763A7A"
+                  color2="#F6F3EC"
                   successFn={() => console.log('Success Fn Called')}
                   failFn={() => console.log('Fail Fn Called')}
                 />

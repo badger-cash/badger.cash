@@ -13,12 +13,15 @@ const BButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 10px;
-  border: 2px solid ${props => props.theme.bchOrange};
+  background-color: ${props => (props.color2 ? props.color2 : props.theme.bg)};
+  border: 2px solid
+    ${props => (props.color1 ? props.color1 : props.theme.bchOrange)};
   padding: 6px 15px;
-  color: ${props => props.theme.bchOrange};
+  color: ${props => (props.color1 ? props.color1 : props.theme.bchOrange)};
   &:hover {
-    background-color: ${props => props.theme.bchOrange};
-    color: ${props => props.theme.bg};
+    background-color: ${props =>
+      props.color1 ? props.color1 : props.theme.bchOrange};
+    color: ${props => (props.color2 ? props.color2 : props.theme.bg)};
   }
 `
 
@@ -67,6 +70,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: max-content;
   grid-template-rows: max-content max-content;
+  color: ${props => (props.color1 ? props.color1 : props.theme.bchGrey)};
 `
 
 // Pending State filler
@@ -142,6 +146,9 @@ type Props = {
   showSatoshis: boolean,
   currency: CurrencyCode,
   children?: React.Node,
+
+  color1?: string,
+  color2?: string,
 
   successFn: Function,
   failFn?: Function,
@@ -242,7 +249,15 @@ class BadgerButton extends React.Component<Props, State> {
 
   render() {
     const { step, BCHPrice } = this.state
-    const { text, price, currency, showSatoshis, children } = this.props
+    const {
+      text,
+      price,
+      currency,
+      showSatoshis,
+      color1,
+      color2,
+      children,
+    } = this.props
 
     const priceInCurrency = BCHPrice[currency] && BCHPrice[currency].price
 
@@ -255,8 +270,8 @@ class BadgerButton extends React.Component<Props, State> {
 
     if (step === 'fresh') {
       return (
-        <Wrapper>
-          <BButton onClick={this.handleClick}>
+        <Wrapper color1={color1}>
+          <BButton onClick={this.handleClick} color1={color1} color2={color2}>
             {children || <Text style={{ lineHeight: '1.3em' }}>{text}</Text>}
             <Text style={{ lineHeight: '1.2em', fontSize: 24 }}>
               {getCurrencyPreSymbol(currency)} {formatPriceDisplay(price)}
