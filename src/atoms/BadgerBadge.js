@@ -16,13 +16,17 @@ const BadgerText = styled.p`
 const BButton = styled.button`
   cursor: pointer;
   border: none;
-  border-radius: 10px;
-  border: 2px solid ${props => props.theme.bchOrange};
+  border-radius: 5px;
+  background-color: ${props => (props.color2 ? props.color2 : props.theme.bg)};
+  border: 2px solid
+    ${props => (props.color1 ? props.color1 : props.theme.bchOrange)};
   padding: 6px 10px;
-  color: ${props => props.theme.bchOrange};
+  color: ${props => (props.color1 ? props.color1 : props.theme.bchOrange)};
   &:hover {
-    background-color: ${props => props.theme.bchOrange};
-    color: ${props => props.theme.bg};
+    background-color: ${props =>
+      props.color1 ? props.color1 : props.theme.bchOrange};
+    color: ${props => (props.color2 ? props.color2 : props.theme.bg)};
+  }
   }
 `
 const Loader = styled.div`
@@ -60,8 +64,11 @@ const Main = styled.div`
   display: grid;
   grid-gap: 12px;
   padding: 15px 8px 6px;
-  border: 1px solid ${props => props.theme.bchGrey};
+  border: 2px solid
+    ${props => (props.color3 ? props.color3 : props.theme.bchGrey)};
   border-radius: 7px;
+  background-color: ${props => (props.color2 ? props.color2 : 'inherit')};
+  color: ${props => (props.color3 ? props.color3 : 'inherit')};
 `
 
 const Prices = styled.div`
@@ -93,10 +100,10 @@ const ButtonContainer = styled.div`
 const BrandBottom = styled.div``
 
 const A = styled.a`
-  color: ${props => props.theme.bchGrey};
+  color: ${props => (props.color3 ? props.color3 : props.theme.bchGrey)};
   text-decoration: none;
   &:hover {
-    color: ${props => props.theme.bchOrange};
+    color: ${props => (props.color1 ? props.color1 : props.theme.bchOrange)};
   }
 `
 // Pending State filler
@@ -173,7 +180,10 @@ type Props = {
   showSatoshis?: boolean,
   showBrand?: boolean,
   currency: CurrencyCode,
-  children?: React.Node,
+
+  color1?: string,
+  color2?: string,
+  color3?: string,
 
   successFn: Function,
   failFn?: Function,
@@ -276,7 +286,17 @@ class BadgerButton extends React.Component<Props, State> {
 
   render() {
     const { step, BCHPrice } = this.state
-    const { text, price, currency, showSatoshis, tag, showBrand } = this.props
+    const {
+      text,
+      price,
+      currency,
+      showSatoshis,
+      tag,
+      showBrand,
+      color1,
+      color2,
+      color3,
+    } = this.props
 
     const priceInCurrency = BCHPrice[currency] && BCHPrice[currency].price
 
@@ -288,7 +308,7 @@ class BadgerButton extends React.Component<Props, State> {
     }
 
     return (
-      <Main>
+      <Main color1={color1} color2={color2} color3={color3}>
         <HeaderText>{text}</HeaderText>
         <Prices>
           <PriceText style={{ textAlign: 'right', lineHeight: '' }}>
@@ -308,7 +328,7 @@ class BadgerButton extends React.Component<Props, State> {
         </Prices>
         <ButtonContainer>
           {step === 'fresh' ? (
-            <BButton onClick={this.handleClick}>
+            <BButton onClick={this.handleClick} color1={color1} color2={color2}>
               <BadgerText style={{ lineHeight: '1.2em', fontSize: 18 }}>
                 {tag}
               </BadgerText>
@@ -326,7 +346,12 @@ class BadgerButton extends React.Component<Props, State> {
         {showBrand && (
           <BrandBottom>
             <Small>
-              <A href="badger.bitcoin.com" target="_blank">
+              <A
+                href="badger.bitcoin.com"
+                target="_blank"
+                color1={color1}
+                color3={color3}
+              >
                 badger.bitcoin.com
               </A>
             </Small>

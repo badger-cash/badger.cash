@@ -18,7 +18,6 @@ const Main = styled.div`
 `
 
 const Section = styled.div`
-  /* background-color: rebeccapurple; */
   display: grid;
   grid-template-areas: 'title' ' examples';
 `
@@ -105,6 +104,29 @@ class BadgerButtonPage extends React.Component<Props> {
                   currency={CURRENCY_EXAMPLE}
                   showSatoshis={true}
                   text="Donate to EatBCH"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+              </SectionExamples>
+            </Section>
+            <Section>
+              <SectionTitle>
+                <H3>Custom text</H3>
+              </SectionTitle>
+              <SectionExamples>
+                <BadgerButton
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  text="Support EatBCH"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+                <BadgerButton
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  text="Send some BCH to EatBCH"
                   successFn={() => console.log('Success Fn Called')}
                   failFn={() => console.log('Fail Fn Called')}
                 />
@@ -233,6 +255,58 @@ class BadgerButtonPage extends React.Component<Props> {
                   currency={CURRENCY_EXAMPLE}
                   showSatoshis={false}
                   text="Support EatBCH"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+              </SectionExamples>
+            </Section>
+            <Section>
+              <SectionTitle>
+                <H3>Custom Colours</H3>
+              </SectionTitle>
+              <SectionExamples>
+                <BadgerBadge
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  text="Support EatBCH"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                  color1="#222930"
+                  color2="#E9E9E9"
+                />
+                <BadgerBadge
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  showSatoshis={true}
+                  text="Support EatBCH"
+                  color1="#DC3D24"
+                  color2="#232B2B"
+                  color3="#e6e6e6"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+                <BadgerBadge
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  showSatoshis={true}
+                  text="Support EatBCH"
+                  color1="#E9C92D"
+                  color2="#FFF"
+                  color3="#000"
+                  successFn={() => console.log('Success Fn Called')}
+                  failFn={() => console.log('Fail Fn Called')}
+                />
+                <BadgerBadge
+                  to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                  price={PRICE_EXAMPLE}
+                  currency={CURRENCY_EXAMPLE}
+                  showSatoshis={true}
+                  text="Support EatBCH"
+                  color1="#763A7A"
+                  color2="#F6F3EC"
                   successFn={() => console.log('Success Fn Called')}
                   failFn={() => console.log('Fail Fn Called')}
                 />
