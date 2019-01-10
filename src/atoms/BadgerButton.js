@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,12 +10,13 @@ import Text from '../atoms/Text'
 const BButton = styled.button`
   cursor: pointer;
   border: none;
-  background-color: ${props => props.theme.brand};
   border-radius: 50px;
-  padding: 15px 25px;
-  color: ${props => props.theme.bg};
+  border: 2px solid ${props => props.theme.brand};
+  padding: 10px 25px;
+  color: ${props => props.theme.brandDark};
   &:hover {
-    background-color: ${props => props.theme.brandDark};
+    background-color: ${props => props.theme.brand};
+    color: ${props => props.theme.bg};
   }
 `
 
@@ -43,6 +44,11 @@ const FillerDiv = styled.div`
   width: ${props => props.width}%;
   background-color: ${props => props.theme.brand};
   transition: 3s all ease;
+`
+
+const Small = styled.span`
+  font-size: 12px;
+  font-weight: 700;
 `
 
 // Pending State filler
@@ -116,6 +122,7 @@ type Props = {
   text?: string,
   price: number,
   currency: CurrencyCode,
+  children?: React.Node,
 
   successFn: Function,
   failFn?: Function,
@@ -165,7 +172,7 @@ class BadgerButton extends React.Component<Props, State> {
   }
 
   handleClick() {
-    const { to, successFn, failFn, text, currency, price } = this.props
+    const { to, successFn, failFn, currency, price } = this.props
     const { BCHPrice } = this.state
 
     const priceInCurrency = BCHPrice[currency].price
@@ -207,11 +214,8 @@ class BadgerButton extends React.Component<Props, State> {
   }
 
   render() {
-    const { step } = this.state
-
-    const { text, price, currency } = this.props
-
-    const { BCHPrice } = this.state
+    const { step, BCHPrice } = this.state
+    const { text, price, currency, children } = this.props
 
     const priceInCurrency = BCHPrice[currency] && BCHPrice[currency].price
 
@@ -225,12 +229,11 @@ class BadgerButton extends React.Component<Props, State> {
     if (step === 'fresh') {
       return (
         <BButton onClick={this.handleClick}>
-          <Text>{text}</Text>
-          <Text>
+          {children || <Text style={{ lineHeight: '1.3em' }}>{text}</Text>}
+          <Text style={{ lineHeight: '1.2em' }}>
             {getCurrencyPreSymbol(currency)} {formatPriceDisplay(price)}
-            {getCurrencyPostSymbol(currency)} - {currency}
+            {getCurrencyPostSymbol(currency)} <Small> {currency}</Small>
           </Text>
-          <Text>{satoshiDisplay} Sats</Text>
         </BButton>
       )
     }
