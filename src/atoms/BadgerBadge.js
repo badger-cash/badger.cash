@@ -5,33 +5,26 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
-import Text from '../atoms/Text'
-import BitcoinCashLogoImage from '../images/bitcoin-cash-logo.svg'
 import BitcoinCashImage from '../images/bitcoin-cash.svg'
+
+const BadgerText = styled.p`
+  font-size: 18px;
+  line-height: 1.5em;
+  margin: 0;
+`
 
 const BButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 10px;
   border: 2px solid ${props => props.theme.bchOrange};
-  padding: 6px 25px;
+  padding: 6px 10px;
   color: ${props => props.theme.bchOrange};
   &:hover {
     background-color: ${props => props.theme.bchOrange};
     color: ${props => props.theme.bg};
   }
 `
-
-const SatoshiText = styled.p`
-  font-size: 12px;
-  margin: 3px 0 0 0;
-  display: grid;
-  grid-template-columns: max-content max-content max-content;
-  justify-content: end;
-  grid-gap: 5px;
-  align-items: center;
-`
-
 const Loader = styled.div`
   height: 20px;
   width: 100%;
@@ -42,9 +35,9 @@ const Loader = styled.div`
 `
 
 const CompleteCircle = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,9 +59,8 @@ const Small = styled.span`
 const Main = styled.div`
   display: grid;
   grid-gap: 12px;
-  padding: 10px;
+  padding: 15px 8px 6px;
   border: 1px solid ${props => props.theme.bchGrey};
-  margin-left: 20px;
   border-radius: 7px;
 `
 
@@ -92,14 +84,21 @@ const HeaderText = styled.h3`
   font-weight: 400;
 `
 const ButtonContainer = styled.div`
-  min-height: 50px;
+  min-height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 `
 
 const BrandBottom = styled.div``
 
+const A = styled.a`
+  color: ${props => props.theme.bchGrey};
+  text-decoration: none;
+  &:hover {
+    color: ${props => props.theme.bchOrange};
+  }
+`
 // Pending State filler
 type PropsFiller = {}
 type StateFiller = { width: number }
@@ -171,7 +170,8 @@ type Props = {
   text?: string,
   tag: string,
   price: number,
-  showSatoshis: boolean,
+  showSatoshis?: boolean,
+  showBrand?: boolean,
   currency: CurrencyCode,
   children?: React.Node,
 
@@ -193,6 +193,7 @@ class BadgerButton extends React.Component<Props, State> {
     currency: 'USD',
     showSatoshis: true,
     tag: 'Donate BCH',
+    showBrand: true,
   }
 
   constructor(props: Props) {
@@ -211,7 +212,14 @@ class BadgerButton extends React.Component<Props, State> {
 
     // Get price on load, and update price every minute
     this.updateBCHPrice(currency)
-    setInterval(() => this.updateBCHPrice(currency), 1000 * 60)
+    this.priceInterval = setInterval(
+      () => this.updateBCHPrice(currency),
+      1000 * 60
+    )
+  }
+
+  componentWillUnmount() {
+    this.priceInterval && clearInterval(this.priceInterval)
   }
 
   async updateBCHPrice(currency: CurrencyCode) {
@@ -268,7 +276,7 @@ class BadgerButton extends React.Component<Props, State> {
 
   render() {
     const { step, BCHPrice } = this.state
-    const { text, price, currency, showSatoshis, tag, children } = this.props
+    const { text, price, currency, showSatoshis, tag, showBrand } = this.props
 
     const priceInCurrency = BCHPrice[currency] && BCHPrice[currency].price
 
@@ -279,7 +287,6 @@ class BadgerButton extends React.Component<Props, State> {
       satoshiDisplay = Math.trunc(price * singleDollarSatoshis) / 100000000
     }
 
-    // if (step === 'fresh') {
     return (
       <Main>
         <HeaderText>{text}</HeaderText>
@@ -302,8 +309,9 @@ class BadgerButton extends React.Component<Props, State> {
         <ButtonContainer>
           {step === 'fresh' ? (
             <BButton onClick={this.handleClick}>
-              {/* {children || <Text style={{ lineHeight: '1.3em' }}>{text}</Text>} */}
-              <Text style={{ lineHeight: '1.2em', fontSize: 18 }}>{tag}</Text>
+              <BadgerText style={{ lineHeight: '1.2em', fontSize: 18 }}>
+                {tag}
+              </BadgerText>
             </BButton>
           ) : step === 'pending' ? (
             <Loader>
@@ -315,31 +323,17 @@ class BadgerButton extends React.Component<Props, State> {
             </CompleteCircle>
           )}
         </ButtonContainer>
-        {/* <BrandBottom>
-          <Small>
-            <a href="badger.bitcoin.com" target="_blank">
-              badger.bitcoin.com
-            </a>
-          </Small>
-        </BrandBottom> */}
+        {showBrand && (
+          <BrandBottom>
+            <Small>
+              <A href="badger.bitcoin.com" target="_blank">
+                badger.bitcoin.com
+              </A>
+            </Small>
+          </BrandBottom>
+        )}
       </Main>
     )
-    // }
-    // if (step === 'pending') {
-    //   return (
-    //     <Loader>
-    //       <Filler />
-    //     </Loader>
-    //   )
-    // // }
-    // // if (step === 'complete') {
-    //   return (
-    //     <CompleteCircle>
-    //       <FontAwesomeIcon icon={faCheck} />
-    //     </CompleteCircle>
-    //   )
-    // }
-    // return <div>State not found</div>
   }
 }
 

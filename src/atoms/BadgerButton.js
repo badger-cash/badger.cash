@@ -14,7 +14,7 @@ const BButton = styled.button`
   border: none;
   border-radius: 10px;
   border: 2px solid ${props => props.theme.bchOrange};
-  padding: 6px 25px;
+  padding: 6px 15px;
   color: ${props => props.theme.bchOrange};
   &:hover {
     background-color: ${props => props.theme.bchOrange};
@@ -61,6 +61,12 @@ const FillerDiv = styled.div`
 const Small = styled.span`
   font-size: 12px;
   font-weight: 700;
+`
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: max-content max-content;
 `
 
 // Pending State filler
@@ -172,7 +178,14 @@ class BadgerButton extends React.Component<Props, State> {
 
     // Get price on load, and update price every minute
     this.updateBCHPrice(currency)
-    setInterval(() => this.updateBCHPrice(currency), 1000 * 60)
+    this.priceInterval = setInterval(
+      () => this.updateBCHPrice(currency),
+      1000 * 60
+    )
+  }
+
+  componentWillUnmount() {
+    this.priceInterval && clearInterval(this.priceInterval)
   }
 
   async updateBCHPrice(currency: CurrencyCode) {
@@ -218,8 +231,8 @@ class BadgerButton extends React.Component<Props, State> {
           this.setState({ step: 'fresh' })
         } else {
           console.log('BadgerButton send success:', res)
-          successFn(res)
           this.setState({ step: 'complete' })
+          successFn(res)
         }
       })
     } else {
@@ -242,7 +255,7 @@ class BadgerButton extends React.Component<Props, State> {
 
     if (step === 'fresh') {
       return (
-        <div>
+        <Wrapper>
           <BButton onClick={this.handleClick}>
             {children || <Text style={{ lineHeight: '1.3em' }}>{text}</Text>}
             <Text style={{ lineHeight: '1.2em', fontSize: 24 }}>
@@ -256,7 +269,7 @@ class BadgerButton extends React.Component<Props, State> {
               BCH {satoshiDisplay}
             </SatoshiText>
           )}
-        </div>
+        </Wrapper>
       )
     }
     if (step === 'pending') {
