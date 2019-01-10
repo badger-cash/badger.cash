@@ -97,6 +97,19 @@ const getCurrencyPostSymbol = (currency: CurrencyCode) => {
   }
 }
 
+const formatPriceDisplay = (price: number) => {
+  if (price >= 1) {
+    if (price % 1 === 0) {
+      // Over 1 no decimal, use whole number
+      return price.toFixed(0)
+    }
+    // Over 1 decimal, show 2 decimals
+    return price.toFixed(2)
+  }
+  // Under 1 show first 2 largest occupied decimals
+  return price.toPrecision(2)
+}
+
 // Main Badger Button
 type Props = {
   to: string,
@@ -214,8 +227,7 @@ class BadgerButton extends React.Component<Props, State> {
         <BButton onClick={this.handleClick}>
           <Text>{text}</Text>
           <Text>
-            {getCurrencyPreSymbol(currency)}
-            {price.toPrecision(2)}
+            {getCurrencyPreSymbol(currency)} {formatPriceDisplay(price)}
             {getCurrencyPostSymbol(currency)} - {currency}
           </Text>
           <Text>{satoshiDisplay} Sats</Text>
