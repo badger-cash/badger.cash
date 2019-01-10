@@ -21,6 +21,7 @@ import H3 from '../atoms/H3'
 import H2 from '../atoms/H2'
 import Button from '../atoms/Button'
 import BadgerButton from '../atoms/BadgerButton'
+import BadgerBadge from '../atoms/BadgerBadge'
 
 import Layout from '../components/Layout'
 import SEO from '../components/Seo'
@@ -256,6 +257,16 @@ const IndexPage = ({ location, data }: Props) => (
               price={0.01 / 3}
               currency="USD"
               text="Donate to EatBCH"
+              successFn={() => console.log('Success Fn Called')}
+              failFn={() => console.log('Fail Fn Called')}
+            />
+
+            <BadgerBadge
+              to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+              price={0.01 / 3}
+              currency="USD"
+              text="Support EatBCH"
+              tag="Donate BCH"
               successFn={() => console.log('Success Fn Called')}
               failFn={() => console.log('Fail Fn Called')}
             />

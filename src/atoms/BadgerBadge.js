@@ -34,7 +34,7 @@ const SatoshiText = styled.p`
 
 const Loader = styled.div`
   height: 20px;
-  width: 75%;
+  width: 100%;
   background-color: ${props => props.theme.fg100};
   border-radius: 10px;
   display: flex;
@@ -62,6 +62,43 @@ const Small = styled.span`
   font-size: 12px;
   font-weight: 700;
 `
+
+const Main = styled.div`
+  display: grid;
+  grid-gap: 12px;
+  padding: 10px;
+  border: 1px solid ${props => props.theme.bchGrey};
+  margin-left: 20px;
+  border-radius: 7px;
+`
+
+const Prices = styled.div`
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-gap: 5px;
+  align-items: end;
+  justify-content: end;
+`
+const PriceText = styled.p`
+  font-size: 18px;
+  line-height: 18px;
+  margin: 0;
+`
+
+const HeaderText = styled.h3`
+  font-size: 24px;
+  line-height: 24px;
+  margin: 0;
+  font-weight: 400;
+`
+const ButtonContainer = styled.div`
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const BrandBottom = styled.div``
 
 // Pending State filler
 type PropsFiller = {}
@@ -132,6 +169,7 @@ const formatPriceDisplay = (price: number) => {
 type Props = {
   to: string,
   text?: string,
+  tag: string,
   price: number,
   showSatoshis: boolean,
   currency: CurrencyCode,
@@ -154,6 +192,7 @@ class BadgerButton extends React.Component<Props, State> {
   static defaultProps = {
     currency: 'USD',
     showSatoshis: true,
+    tag: 'Donate BCH',
   }
 
   constructor(props: Props) {
@@ -229,7 +268,7 @@ class BadgerButton extends React.Component<Props, State> {
 
   render() {
     const { step, BCHPrice } = this.state
-    const { text, price, currency, showSatoshis, children } = this.props
+    const { text, price, currency, showSatoshis, tag, children } = this.props
 
     const priceInCurrency = BCHPrice[currency] && BCHPrice[currency].price
 
@@ -240,40 +279,67 @@ class BadgerButton extends React.Component<Props, State> {
       satoshiDisplay = Math.trunc(price * singleDollarSatoshis) / 100000000
     }
 
-    if (step === 'fresh') {
-      return (
-        <div>
-          <BButton onClick={this.handleClick}>
-            {children || <Text style={{ lineHeight: '1.3em' }}>{text}</Text>}
-            <Text style={{ lineHeight: '1.2em', fontSize: 24 }}>
-              {getCurrencyPreSymbol(currency)} {formatPriceDisplay(price)}
-              {getCurrencyPostSymbol(currency)} <Small> {currency}</Small>
-            </Text>
-          </BButton>
+    // if (step === 'fresh') {
+    return (
+      <Main>
+        <HeaderText>{text}</HeaderText>
+        <Prices>
+          <PriceText style={{ textAlign: 'right', lineHeight: '' }}>
+            {getCurrencyPreSymbol(currency)} {formatPriceDisplay(price)}{' '}
+            {getCurrencyPostSymbol(currency)}{' '}
+          </PriceText>
+          <Small>{currency}</Small>
           {showSatoshis && (
-            <SatoshiText>
-              <img src={BitcoinCashImage} style={{ height: 14 }} alt="BCH" />{' '}
-              BCH {satoshiDisplay}
-            </SatoshiText>
+            <>
+              <PriceText>
+                <img src={BitcoinCashImage} style={{ height: 14 }} alt="BCH" />{' '}
+                {satoshiDisplay}{' '}
+              </PriceText>
+              <Small>BCH</Small>
+            </>
           )}
-        </div>
-      )
-    }
-    if (step === 'pending') {
-      return (
-        <Loader>
-          <Filler />
-        </Loader>
-      )
-    }
-    if (step === 'complete') {
-      return (
-        <CompleteCircle>
-          <FontAwesomeIcon icon={faCheck} />
-        </CompleteCircle>
-      )
-    }
-    return <div>State not found</div>
+        </Prices>
+        <ButtonContainer>
+          {step === 'fresh' ? (
+            <BButton onClick={this.handleClick}>
+              {/* {children || <Text style={{ lineHeight: '1.3em' }}>{text}</Text>} */}
+              <Text style={{ lineHeight: '1.2em', fontSize: 18 }}>{tag}</Text>
+            </BButton>
+          ) : step === 'pending' ? (
+            <Loader>
+              <Filler />
+            </Loader>
+          ) : (
+            <CompleteCircle>
+              <FontAwesomeIcon icon={faCheck} />
+            </CompleteCircle>
+          )}
+        </ButtonContainer>
+        {/* <BrandBottom>
+          <Small>
+            <a href="badger.bitcoin.com" target="_blank">
+              badger.bitcoin.com
+            </a>
+          </Small>
+        </BrandBottom> */}
+      </Main>
+    )
+    // }
+    // if (step === 'pending') {
+    //   return (
+    //     <Loader>
+    //       <Filler />
+    //     </Loader>
+    //   )
+    // // }
+    // // if (step === 'complete') {
+    //   return (
+    //     <CompleteCircle>
+    //       <FontAwesomeIcon icon={faCheck} />
+    //     </CompleteCircle>
+    //   )
+    // }
+    // return <div>State not found</div>
   }
 }
 
