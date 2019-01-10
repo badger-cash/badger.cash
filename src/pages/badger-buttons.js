@@ -312,6 +312,24 @@ class BadgerButtonPage extends React.Component<Props> {
                 />
               </SectionExamples>
             </Section>
+            <Section>
+              <SectionTitle>
+                <H3>Currencies</H3>
+              </SectionTitle>
+              <SectionExamples>
+                {currencyPrice.map(item => (
+                  <BadgerBadge
+                    key={item[0]}
+                    to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+                    price={item[1]}
+                    currency={item[0]}
+                    text="Donate to EatBCH"
+                    successFn={SUCCESSFN_EXAMPLE}
+                    failFn={() => console.log('Fail Fn Called')}
+                  />
+                ))}
+              </SectionExamples>
+            </Section>
           </Main>
         </Container>
       </Layout>
