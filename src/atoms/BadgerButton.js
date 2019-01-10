@@ -265,7 +265,9 @@ class BadgerButton extends React.Component<Props, State> {
     if (priceInCurrency) {
       const singleDollarValue = priceInCurrency / 100
       const singleDollarSatoshis = 100000000 / singleDollarValue
-      satoshiDisplay = Math.trunc(price * singleDollarSatoshis) / 100000000
+      satoshiDisplay = (
+        Math.trunc(price * singleDollarSatoshis) / 100000000
+      ).toFixed(8)
     }
 
     if (step === 'fresh') {
