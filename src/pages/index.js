@@ -254,7 +254,7 @@ const IndexPage = ({ location, data }: Props) => (
             <BadgerButton
               to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
               price={0.01 / 3}
-              currency="CAD"
+              currency="USD"
               text="Donate to EatBCH"
               successFn={() => console.log('Success Fn Called')}
               failFn={() => console.log('Fail Fn Called')}

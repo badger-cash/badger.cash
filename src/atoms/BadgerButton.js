@@ -45,6 +45,7 @@ const FillerDiv = styled.div`
   transition: 3s all ease;
 `
 
+// Pending State filler
 type PropsFiller = {}
 type StateFiller = { width: number }
 
@@ -62,15 +63,43 @@ class Filler extends React.Component<PropsFiller, StateFiller> {
   }
 }
 
-type CurrencyCode = 'USD' | 'CAD' | 'HKD' | 'JPY'
+// Currency endpoints, logic, and formatters
+type CurrencyCode = 'USD' | 'CAD' | 'HKD' | 'JPY' | 'GBP' | 'EUR' | 'CNY'
 
 const buildPriceEndpoint = (currency: CurrencyCode) => {
   return `https://index-api.bitcoin.com/api/v0/cash/price/${currency}`
 }
 
+const getCurrencyPreSymbol = (currency: CurrencyCode) => {
+  switch (currency) {
+    case 'USD':
+    case 'CAD':
+      return '$'
+    case 'GBP':
+      return '£'
+    case 'EUR':
+      return '€'
+    case 'HKD':
+      return 'HK$'
+    case 'JPY':
+      return '¥'
+    default:
+      return ''
+  }
+}
+
+const getCurrencyPostSymbol = (currency: CurrencyCode) => {
+  switch (currency) {
+    case 'CNY':
+      return '元'
+    default:
+      return ''
+  }
+}
+
+// Main Badger Button
 type Props = {
   to: string,
-  // satoshis: number,
   text?: string,
   price: number,
   currency: CurrencyCode,
@@ -106,27 +135,17 @@ class BadgerButton extends React.Component<Props, State> {
 
   componentDidMount() {
     const currency: CurrencyCode = this.props.currency
+
+    // Get price on load, and update price every minute
     this.updateBCHPrice(currency)
-    // const priceUSD= await fetch('https://index-api.bitcoin.com/api/v0/cash/price/usd')
+    setInterval(() => this.updateBCHPrice(currency), 1000 * 60)
   }
 
   async updateBCHPrice(currency: CurrencyCode) {
     const priceRequest = await fetch(buildPriceEndpoint(currency))
     const result = await priceRequest.json()
 
-    // if (result.price != '') {
-    //   var singleDollarValue = result.price / 100
-    //   var singleDollarSatoshis = 100000000 / singleDollarValue
-    //   // resolve(singleDollarSatoshis);
-    // }
-
     const { price, stamp } = result
-    // if(price) {
-    //   const singleDollarValue = price / 100;
-    //   const singleDollarSatoshis = 100000000 / singleDollarValue
-
-    // }
-
     this.setState({
       BCHPrice: { [currency]: { price, stamp } },
     })
@@ -183,21 +202,23 @@ class BadgerButton extends React.Component<Props, State> {
 
     const priceInCurrency = BCHPrice[currency] && BCHPrice[currency].price
 
-    let satoshis = '----'
+    let satoshiDisplay = '----'
     if (priceInCurrency) {
       const singleDollarValue = priceInCurrency / 100
       const singleDollarSatoshis = 100000000 / singleDollarValue
-      satoshis = Math.trunc(price * singleDollarSatoshis)
+      satoshiDisplay = Math.trunc(price * singleDollarSatoshis)
     }
 
     if (step === 'fresh') {
       return (
         <BButton onClick={this.handleClick}>
-          <Text>
-            {price.toPrecision(2)} - {currency}
-          </Text>
           <Text>{text}</Text>
-          <Text>{satoshis} Sats</Text>
+          <Text>
+            {getCurrencyPreSymbol(currency)}
+            {price.toPrecision(2)}
+            {getCurrencyPostSymbol(currency)} - {currency}
+          </Text>
+          <Text>{satoshiDisplay} Sats</Text>
         </BButton>
       )
     }
