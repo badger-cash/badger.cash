@@ -9,7 +9,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import SEO from './Seo'
 
 import defaultTheme from '../styles/themes'
-import FaviconURL from '../images/favicon.png'
+import FaviconURL from '../images/bitcoin-cash-full.png'
 import './layout.css'
 
 import '@fortawesome/fontawesome-svg-core/styles.css'
