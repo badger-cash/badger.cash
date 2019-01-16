@@ -9,7 +9,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import SEO from './Seo'
 
 import defaultTheme from '../styles/themes'
-import Favicon from '../images/favicon.png'
+import FullFavicon from '../images/bitcoin-cash-full.png'
 import './layout.css'
 
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -47,7 +47,7 @@ const Layout = ({ children, location }: Props) => (
             'Badger wallet, developer tools, bitcoin, bitcoin cash, BCH, bitcoin wallet, sdk, api'
           }
           location={location}
-          image={Favicon}
+          image={FullFavicon}
         >
           <meta charSet="utf-8" />
           <script>
