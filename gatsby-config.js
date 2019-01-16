@@ -1,8 +1,16 @@
+let activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || 'development'
+
+console.log(`Using environment config: '${activeEnv}'`)
+
 module.exports = {
   siteMetadata: {
     title: `Badger Wallet`,
     description: `Badger Wallet is your gateway to Bitcoin Cash distributed apps, your identity vault, Simple Ledger and Wormhole tokens`,
-    siteUrl: 'https://badger.bitcoin.com',
+    siteUrl: `${
+      activeEnv === 'production'
+        ? 'https://badger.bitcoin.com'
+        : 'https://badger.btctest.net'
+    }`,
   },
   plugins: [
     `gatsby-plugin-flow`,
