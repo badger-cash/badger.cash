@@ -62,7 +62,7 @@ const FillerDiv = styled.div`
 `
 
 const Small = styled.span`
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 `
 
