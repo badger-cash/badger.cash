@@ -6,7 +6,7 @@ import { css } from 'styled-components'
 // small is same as no media query.
 const sizes = {
   large: 1140,
-  medium: 720,
+  medium: 800,
   small: 0,
 }
 // Iterate through the sizes and create a media template
