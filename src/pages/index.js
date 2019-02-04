@@ -5,6 +5,8 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
+import { BadgerBadge } from 'badger-components-react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChrome,
@@ -20,7 +22,6 @@ import Text from '../atoms/Text'
 import H3 from '../atoms/H3'
 import H2 from '../atoms/H2'
 import Button from '../atoms/Button'
-import BadgerButton from '../atoms/BadgerButton'
 
 import Layout from '../components/Layout'
 import SEO from '../components/Seo'
@@ -179,7 +180,41 @@ const IndexPage = ({ location, data }: Props) => (
         </DownloadRow>
       </HeroContent>
     </Hero>
+
     <Container>
+      <Section>
+        <Container thin>
+          <SectionTopGroup>
+            <H2 center>Badger Button</H2>
+            <Text center>
+              Badger is your identity on this new web. You can pay for premium
+              content, run smart contracts and experience Bitcoin Cash apps
+              seamlessly and trust free. Install Badger to test the Badger
+              Button demo below now.
+            </Text>
+          </SectionTopGroup>
+        </Container>
+        <BadgerButtonExample>
+          <BadgerButtonExampleText>
+            <H3>Micropayments</H3>
+            <Text>
+              Paywalls, in-app purchases, tokens and smart-contracts. Experience
+              an entirely new web seamlessly.
+            </Text>
+          </BadgerButtonExampleText>
+          <ButtonHolder>
+            <BadgerBadge
+              to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
+              text="Donate to EatBCH"
+              tag="Donate"
+              showBrand={false}
+              price={0.01}
+              successFn={() => console.log('Success Fn Called')}
+              failFn={() => console.log('Fail Fn Called')}
+            />
+          </ButtonHolder>
+        </BadgerButtonExample>
+      </Section>
       <Section>
         <Container thin>
           <SectionTopGroup>
@@ -228,37 +263,6 @@ const IndexPage = ({ location, data }: Props) => (
             </Caption>
           </CaptionArea>
         </Example>
-      </Section>
-
-      <Section>
-        <Container thin>
-          <SectionTopGroup>
-            <H2 center>Badger Button</H2>
-            <Text center>
-              Badger is your identity on this new web. You can pay for premium
-              content, run smart contracts and experience Bitcoin Cash apps
-              seamlessly and trust free. Install Badger to test the Badger
-              Button demo below now.
-            </Text>
-          </SectionTopGroup>
-        </Container>
-        <BadgerButtonExample>
-          <BadgerButtonExampleText>
-            <H3>Micropayments</H3>
-            <Text>
-              Paywalls, in-app purchases, tokens and smart-contracts. Experience
-              an entirely new web seamlessly.
-            </Text>
-          </BadgerButtonExampleText>
-          <ButtonHolder>
-            <BadgerButton
-              to="bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g"
-              satoshis={1000}
-              successFn={() => console.log('Success Fn Called')}
-              failFn={() => console.log('Fail Fn Called')}
-            />
-          </ButtonHolder>
-        </BadgerButtonExample>
       </Section>
 
       <Section>
@@ -313,7 +317,7 @@ export const query = graphql`
     heroImage: file(relativePath: { eq: "bg-masthead.jpg" }) {
       childImageSharp {
         fluid(
-          duotone: { highlight: "#f9b016", shadow: "#191919" }
+          duotone: { highlight: "#478559", shadow: "#191919" }
           maxWidth: 2000
           quality: 85
         ) {

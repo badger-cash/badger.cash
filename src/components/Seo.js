@@ -7,7 +7,7 @@ type Props = {
   title: string,
   description?: string,
   image?: string,
-  keywords?: string,
+  keywords?: string[],
   location?: { pathname: string },
   children?: React.Node,
 }

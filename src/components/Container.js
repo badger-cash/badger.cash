@@ -8,7 +8,7 @@ const Container = styled.div`
   padding: 0 1%;
 
   ${media.medium`
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     padding: 0;
   `}
@@ -20,7 +20,7 @@ const Container = styled.div`
     ${props =>
       props.thin &&
       css`
-        width: 730px;
+        width: 800px;
       `}
   `};
 `
