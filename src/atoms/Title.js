@@ -11,6 +11,7 @@ const Title = styled.h1`
   line-height: 1em;
   margin-top: 0;
   margin-bottom: 0.2em;
+  color: ${props => props.theme.brand};
   ${media.large`
     font-size: ${18 * 6.5}px;
   `}
