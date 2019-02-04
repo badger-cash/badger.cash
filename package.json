@@ -2,7 +2,7 @@
   "name": "badger-bitcoin-com",
   "private": true,
   "description": "Badger Wallet, your gateway to the Bitcoin Cash (BCH) ecosystem",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "peter@bitcoin.com",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.12",
