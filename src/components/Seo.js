@@ -49,6 +49,10 @@ class HelmetPlus extends React.PureComponent<Props> {
           <meta name="twitter:description" content={description} />
         )}
         {image && <meta name="twitter:image" content={image} />}
+        <meta
+          name="google-site-verification"
+          content="FZa3ZyV5j40_7qnvnXcgOGz2xJjRLQQB_aRE-mkTmSY"
+        />
 
         {children}
       </Helmet>
