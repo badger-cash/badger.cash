@@ -198,9 +198,7 @@ const IndexPage = ({ location, data }: Props) => (
           </SectionTopGroup>
         </Container>
         <Example>
-          {/* <div style={{maxHeight: 500, position: 'relative'}}> */}
           <Img fluid={data.slpImage.childImageSharp.fluid} />
-          {/* </div> */}
           <CaptionArea>
             <Caption>
               <H3>Token Vault</H3>
@@ -348,7 +346,7 @@ export const query = graphql`
     heroImage: file(relativePath: { eq: "bg-masthead.jpg" }) {
       childImageSharp {
         fluid(
-          duotone: { highlight: "#478559", shadow: "#191919" }
+          duotone: { highlight: "#444444", shadow: "#191919" }
           maxWidth: 2000
           quality: 85
         ) {
