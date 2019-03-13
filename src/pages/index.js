@@ -137,7 +137,7 @@ const SocialCircle = styled.a`
 
 type Props = {
   location: any,
-  data: { heroImage: any, identityImage: any, cashIDImage: any },
+  data: { heroImage: any, identityImage: any, cashIDImage: any, slpImage: any },
 }
 
 const IndexPage = ({ location, data }: Props) => (
@@ -152,6 +152,10 @@ const IndexPage = ({ location, data }: Props) => (
         'wallet',
         'distributed applications',
         'dapp',
+        'bitcoin cash wallet',
+        'slp tokens',
+        'bitcoin cash tokens',
+        'slp wallet',
       ]}
     />
     <Hero>
@@ -182,6 +186,31 @@ const IndexPage = ({ location, data }: Props) => (
     </Hero>
 
     <Container>
+      <Section>
+        <Container thin>
+          <SectionTopGroup>
+            <H2 center>SLP Token Vault</H2>
+            <Text center>
+              Full support for Simple Ledger Protocol (SLP) tokens on the
+              Bitcoin Cash (BCH) blockchain. Badger wallet has full support for
+              receiving and sending all SLP tokens.
+            </Text>
+          </SectionTopGroup>
+        </Container>
+        <Example>
+          <Img fluid={data.slpImage.childImageSharp.fluid} />
+          <CaptionArea>
+            <Caption>
+              <H3>Token Vault</H3>
+              <Text>
+                Hold, store, and send all of your SLP tokens with Badger wallet.
+                SLP is the leading protocol to tokenize anything ontop of
+                Bitcoin Cash (BCH)
+              </Text>
+            </Caption>
+          </CaptionArea>
+        </Example>
+      </Section>
       <Section>
         <Container thin>
           <SectionTopGroup>
@@ -317,7 +346,7 @@ export const query = graphql`
     heroImage: file(relativePath: { eq: "bg-masthead.jpg" }) {
       childImageSharp {
         fluid(
-          duotone: { highlight: "#478559", shadow: "#191919" }
+          duotone: { highlight: "#444444", shadow: "#191919" }
           maxWidth: 2000
           quality: 85
         ) {
@@ -333,6 +362,13 @@ export const query = graphql`
       }
     }
     cashIDImage: file(relativePath: { eq: "cashid.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 800, quality: 85) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    slpImage: file(relativePath: { eq: "slp-tokens.png" }) {
       childImageSharp {
         fluid(maxWidth: 800, quality: 85) {
           ...GatsbyImageSharpFluid
