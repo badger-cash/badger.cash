@@ -27,7 +27,7 @@ const TermsOfUsePage = ({ location, data }: Props) => {
   return (
     <Layout location={location}>
       <SEO
-        title="Terms of Use - n=badger.bitcoin.com"
+        title="Terms of Use - badger.bitcoin.com"
         keywords={[`Badger wallet`, `terms of use`, `ToU`]}
       />
       <Container>
