@@ -124,8 +124,8 @@ const SocialCircle = styled.a`
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  background-color: ${props => props.theme.fg100};
-  color: ${props => props.theme.fg900};
+  background-color: ${props => props.theme.fg900};
+  color: ${props => props.theme.brand};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -310,7 +310,7 @@ const IndexPage = ({ location, data }: Props) => (
         </Container>
       </Section>
 
-      <Section style={{ borderBottom: 'none', paddingBottom: 0 }}>
+      <Section style={{ borderBottom: 'none' }}>
         <Container thin>
           <SocialLinks>
             <SocialCircle
@@ -332,6 +332,13 @@ const IndexPage = ({ location, data }: Props) => (
               <FontAwesomeIcon icon={faTelegram} />
             </SocialCircle>
           </SocialLinks>
+        </Container>
+      </Section>
+      <Section style={{ borderBottom: 'none', padding: 0 }}>
+        <Container thin>
+          <SmartLink to="/terms-of-use">
+            <Text center>Terms of Use</Text>
+          </SmartLink>
         </Container>
       </Section>
     </Container>
