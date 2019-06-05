@@ -98,13 +98,13 @@ Badger’s Copyright Agent can be reached at:
 
 Email: badger [at] bitcoin [dot] com
 
-13. APPLICABLE LAW AND CLASS ACTION WAIVER
+## 13. APPLICABLE LAW AND CLASS ACTION WAIVER
 
-13.1 APPLICABLE LAW
+### 13.1 APPLICABLE LAW
 
 Any dispute, controversy, or claim arising out of or relating to this agreement shall be governed and construed in accordance with the laws of Saint Kitts and Nevis and resolved in the court of Saint Kitts and Nevis. Saint Kitts and Nevis shall have exclusive jurisdiction over such matters.
 
-13.2 CLASS ACTION WAIVER
+### 13.2 CLASS ACTION WAIVER
 
 EXCEPT WHERE PROHIBITED BY APPLICABLE LAW, YOU AGREE THAT ANY DISPUTE RESOLUTION PROCEEDING WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS, CONSOLIDATED, OR REPRESENTATIVE ACTION.
 
