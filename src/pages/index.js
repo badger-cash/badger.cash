@@ -197,12 +197,12 @@ const IndexPage = ({ location, data }: Props) => (
               </Text>
             </Button>
           </SmartLink>
-          <SmartLink to="https://google.com">
+          <SmartLink to="https://itunes.apple.com/us/app/badger-wallet-by-bitcoin-com/id1464796422">
             <AppImageHolder>
               <Img fluid={data.appStoreImage.childImageSharp.fluid} />
             </AppImageHolder>
           </SmartLink>
-          <SmartLink to="https://google.com">
+          <SmartLink to="https://play.google.com/store/apps/details?id=com.badgermobile">
             <AppImageHolder>
               <Img fluid={data.playStoreImage.childImageSharp.fluid} />
             </AppImageHolder>
