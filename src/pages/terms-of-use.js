@@ -12,8 +12,6 @@ import SEO from '../components/Seo'
 import Container from '../components/Container'
 
 import SmartLink from '../atoms/SmartLink'
-import Title from '../atoms/Title'
-import Text from '../atoms/Text'
 import H3 from '../atoms/H3'
 
 const BackContainer = styled.div`

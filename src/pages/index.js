@@ -38,7 +38,7 @@ const HeroContent = styled.div`
 const Hero = styled.div`
   display: grid;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   min-height: 93vh;
   background-color: ${props => props.theme.brand};
   position: relative;
@@ -46,11 +46,19 @@ const Hero = styled.div`
   color: ${props => props.theme.heroText};
 `
 
-const DownloadRow = styled.div`
+const DownloadGrid = styled.div`
   display: grid;
   grid-gap: 15px;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 200px);
+  ${media.large`
+    grid-template-columns: 200px 200px;
+  `}
+`
+
+const AppImageHolder = styled.div`
+  align-items: center;
+  justify-content: center;
 `
 
 const Section = styled.div`
@@ -137,7 +145,14 @@ const SocialCircle = styled.a`
 
 type Props = {
   location: any,
-  data: { heroImage: any, identityImage: any, cashIDImage: any, slpImage: any },
+  data: {
+    heroImage: any,
+    identityImage: any,
+    cashIDImage: any,
+    slpImage: any,
+    playStoreImage: any,
+    appStoreImage: any,
+  },
 }
 
 const IndexPage = ({ location, data }: Props) => (
@@ -166,7 +181,8 @@ const IndexPage = ({ location, data }: Props) => (
       <HeroContent>
         <Title>Badger</Title>
         <H3>Your gateway to the world of Bitcoin Cash (BCH) apps</H3>
-        <DownloadRow>
+
+        <DownloadGrid>
           <SmartLink to="https://chrome.google.com/webstore/detail/badger-wallet/jadobjbcgibiopkifknkfnohlelpocll">
             <Button>
               <Text>
@@ -181,7 +197,17 @@ const IndexPage = ({ location, data }: Props) => (
               </Text>
             </Button>
           </SmartLink>
-        </DownloadRow>
+          <SmartLink to="https://itunes.apple.com/us/app/badger-wallet-by-bitcoin-com/id1464796422">
+            <AppImageHolder>
+              <Img fluid={data.appStoreImage.childImageSharp.fluid} />
+            </AppImageHolder>
+          </SmartLink>
+          <SmartLink to="https://play.google.com/store/apps/details?id=com.badgermobile">
+            <AppImageHolder>
+              <Img fluid={data.playStoreImage.childImageSharp.fluid} />
+            </AppImageHolder>
+          </SmartLink>
+        </DownloadGrid>
       </HeroContent>
     </Hero>
 
@@ -378,6 +404,20 @@ export const query = graphql`
     slpImage: file(relativePath: { eq: "slp-tokens.png" }) {
       childImageSharp {
         fluid(maxWidth: 800, quality: 85) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    playStoreImage: file(relativePath: { eq: "google-play-badge.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 250, quality: 85) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    appStoreImage: file(relativePath: { eq: "app-store-badge.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 250, quality: 85) {
           ...GatsbyImageSharpFluid
         }
       }
