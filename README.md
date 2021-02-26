@@ -1,5 +1,5 @@
 <h1 align="center">
-  Badger.bitcoin.com
+  Badger.cash
 </h1>
 
 ### Development Setup
